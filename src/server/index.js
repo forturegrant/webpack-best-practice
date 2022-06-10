@@ -16,8 +16,9 @@ console.log(Appstring, 'Appstring');
 const htmlTemplate = fs.readFileSync(path.join(__dirname, '../../dist/index.html'), {encoding: 'utf8'});
 console.log(htmlTemplate, 'htmlTemplate');
 const newHtml = htmlTemplate.replace('<!-- app -->', Appstring);
+console.log(newHtml, 'newHtml');
 
-app.use(express.static(path.join(__dirname, '../../dist')));
+app.use('/public', express.static(path.join(__dirname, '../../dist')));
 
 app.get('/', (req, res) => {
     res.send(newHtml);

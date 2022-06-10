@@ -3,10 +3,12 @@ const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: path.join(__dirname, 'src/client/index'),
+    entry: path.join(__dirname, 'src/client/index.tsx'),
+    //devtool: 'source-map',
     output: {
         filename: 'bundle.js',
-        path: `${__dirname}/dist`
+        path: `${__dirname}/dist`,
+        publicPath: '/public'
     },
     module: {
         rules: [
@@ -14,8 +16,16 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: '/node_modules/'
             }
-        ]
+        ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js']
     },
     plugins: [
         new HtmlPlugin({
@@ -25,5 +35,8 @@ module.exports = {
     devServer: {
         hot: true,
         port: '3000'
-    }
+    },
+    optimization: {
+        usedExports: true,
+    },
 }
