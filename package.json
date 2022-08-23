@@ -41,6 +41,7 @@
     "lint:fix": "npx eslint --fix --ext .js,.tsx src"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "qiankun": "^2.7.4"
   }
 }

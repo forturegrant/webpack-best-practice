@@ -9,8 +9,8 @@ module.exports = {
     // devtool: 'source-map',
     output: {
         // filename: 'bundle.js',
-        path: `${__dirname}/dist`,
-        publicPath: '/public'
+        path: `${__dirname}/dist`
+        // publicPath: '/public'
     },
     externals: {
         lodash: '_'
