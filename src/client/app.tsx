@@ -3,6 +3,8 @@ import './index.less';
 import Father from './useImperativeHandle';
 import Test from './useReducer';
 import Forward from './forwardRef';
+import { ATest1, ATest2 } from './hoc';
+// import  from 'monaco-editor';
 
 export default class App extends React.Component {
     render() {
@@ -11,6 +13,9 @@ export default class App extends React.Component {
             <Father />
             <Forward />
             <Test />
+            <ATest1 />
+            <ATest2 />
+            {/* <MonacoEditor /> */}
         </div>
     }
 }

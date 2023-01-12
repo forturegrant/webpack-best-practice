@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { Component } from 'react';
+
 // class Child extends Component {
 //     constructor() {
 //         super();
