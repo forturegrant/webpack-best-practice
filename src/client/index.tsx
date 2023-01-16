@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import App from "./app";
-import { add } from "./math";
+import { add, getName } from "./math";
 //@ts-ignore
 import _ from "lodash";
 import { registerMicroApps, start } from "qiankun";
@@ -34,12 +34,27 @@ async function fn() {
   console.log("do something...");
 }
 
-fn();
-
 render(<App />, document.getElementById("root"));
+
+// d.ts
+getName(1)
+// const obj2: fn2 = () => {};
+// const obj1: fn1 = () => {
+//   return {};
+// };
 
 // import mdHtml from './test.md'
 // const content = document.createElement('div')
 // content.className = 'content'
 // content.innerHTML = mdHtml
 // document.body.appendChild(content)
+
+// import { getName, MyPlugin, customGetAgeFunction } from 'typescript-desc';
+
+// getName('zzp');
+// MyPlugin.f('1');
+// customGetAgeFunction(18);
+
+/**
+ * 
+ */
