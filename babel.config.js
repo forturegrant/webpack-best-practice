@@ -5,6 +5,7 @@ module.exports = {
     "@babel/preset-react",
   ],
   plugins: [
+    '@babel/plugin-proposal-class-properties',
     [require("./babelPluginBtoC.js")],
     [
       require("babel-plugin-async-await-add-try-catch"),

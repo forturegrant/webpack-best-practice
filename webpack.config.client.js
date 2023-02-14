@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     main: path.join(__dirname, "src/client/index.tsx"),
   },
-  // devtool: 'source-map',
+  devtool: 'inline-source-map',
   output: {
     // filename: 'bundle.js',
     path: `${__dirname}/dist`,
