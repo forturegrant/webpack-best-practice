@@ -6,15 +6,15 @@ module.exports = {
   entry: {
     main: path.join(__dirname, "src/client/index.tsx"),
   },
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
   output: {
     // filename: 'bundle.js',
     path: `${__dirname}/dist`,
     // publicPath: '/public'
   },
-  externals: {
-    lodash: "_",
-  },
+  // externals: {
+  //   lodash: "_",
+  // },
   module: {
     rules: [
       {

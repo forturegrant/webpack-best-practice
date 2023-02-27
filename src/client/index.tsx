@@ -1,14 +1,32 @@
 import React from "react";
 import { render } from "react-dom";
 import App from "./app";
-import { add, getName } from "./math";
-//@ts-ignore
-import _ from "lodash";
-import { registerMicroApps, start } from "qiankun";
+// import { add, getName } from "./math";
+// //@ts-ignore
+// import _ from "lodash";
+import { registerMicroApps, start, loadMicroApp } from "qiankun";
 
-console.log(_.join(["a", "b", "c"], "***"));
+// console.log(_.join(["a", "b", "c"], "***"));
 
-add(1, 2);
+// add(1, 2);
+
+// const a = <T,>(value: T): T => value;
+
+// console.log(a(2), "aa");
+
+// const c = 1;
+// console.log(b, 'balabalaba');
+
+// async function fn() {
+//   await new Promise((resolve, reject) => reject("报错"));
+//   await new Promise((resolve) => resolve(1));
+//   console.log("do something...");
+// }
+
+render(<App />, document.getElementById("root"));
+
+// // d.ts
+// getName(1)
 
 registerMicroApps([
   {
@@ -21,23 +39,6 @@ registerMicroApps([
 // 启动 qiankun
 start();
 
-const a = <T,>(value: T): T => value;
-
-console.log(a(2), "aa");
-
-const c = 1;
-console.log(b, 'balabalaba');
-
-async function fn() {
-  await new Promise((resolve, reject) => reject("报错"));
-  await new Promise((resolve) => resolve(1));
-  console.log("do something...");
-}
-
-render(<App />, document.getElementById("root"));
-
-// d.ts
-getName(1)
 // const obj2: fn2 = () => {};
 // const obj1: fn1 = () => {
 //   return {};

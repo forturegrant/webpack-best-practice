@@ -9,12 +9,16 @@ import SuspensePacking from './suspensePacking';
 import TestAsync from './useAsync';
 import Index from './useIndex';
 import CC from './classComponent';
+import Dong from './dong';
+import Ahooks from './ahooks';
+
 // import  from 'monaco-editor';
 
 export default class App extends React.Component {
     render() {
         return <div>
             <div className='header'>222</div>
+            <div id='container'></div>
             {/* <Father />
             <Forward />
             <Test />
@@ -25,6 +29,8 @@ export default class App extends React.Component {
             <div><TestAsync /></div>
             <div><Index /></div>
             <div><CC /></div>
+            <div><Ahooks /></div>
+            {/* <div><Dong /></div> */}
         </div>
     }
 }
