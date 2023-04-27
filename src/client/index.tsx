@@ -5,6 +5,7 @@ import App from "./app";
 // //@ts-ignore
 // import _ from "lodash";
 import { registerMicroApps, start, loadMicroApp } from "qiankun";
+import { ReactDOM } from '../reactCode/react';
 
 // console.log(_.join(["a", "b", "c"], "***"));
 
@@ -59,3 +60,4 @@ start();
 /**
  * 
  */
+ReactDOM.render(<div key='title' id="title">title</div>, document.getElementById('root'));

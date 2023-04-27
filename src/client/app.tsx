@@ -11,6 +11,7 @@ import Index from './useIndex';
 import CC from './classComponent';
 import Dong from './dong';
 import Ahooks from './ahooks';
+import Boom from './boom';
 
 // import  from 'monaco-editor';
 
@@ -30,6 +31,7 @@ export default class App extends React.Component {
             <div><Index /></div>
             <div><CC /></div>
             <div><Ahooks /></div>
+            {/* <div><Boom isShow /></div> */}
             {/* <div><Dong /></div> */}
         </div>
     }
