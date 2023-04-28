@@ -24,6 +24,18 @@ function updateHostRoot (current, workInProgress) {
   return workInProgress.child;
 }
 
+function updateHostComponent (current, workInProgress) {
+  // 获取此原生组件的类型 span p
+  const type = workInProgress.type;
+  // 新属性
+  const nextProps = workInProgress.pendingProps;
+  const nextChildren = nextProps.children;
+  // 在react中，如果一个原生组件，它只有一个儿子，并且这个儿子是一个字符串的话，
+  // 处理子节点，根据老fiber和新的虚拟DOM进行对比，创建新的fiber树
+  reconcileChildren(current, workInProgress, nextChildren);
+  return workInProgress.child;
+}
+
 export function reconcileChildren (current, workInProgress, nextChildren) {
   // 如果current有值，说明这是更新
   if (current) {
