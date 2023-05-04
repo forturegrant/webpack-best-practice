@@ -37,9 +37,8 @@ export function createWorkInProgress (current, pendingProps) {
   workInProgress.flags = NoFlags;
   workInProgress.child = null;
   workInProgress.sibling = null;
-  workInProgress.updateQuene = null;
+  workInProgress.updateQuene = current.updateQuene;
   workInProgress.firstEffect = workInProgress.lastEffect = workInProgress.nextEffect = null;
-  workInProgress.child = null;
   return workInProgress;
 }
 
@@ -51,7 +50,7 @@ export function createWorkInProgress (current, pendingProps) {
 export function createFiberFromElement (element) {
   const { key, type, props } = element;
   let tag;
-  if (typeof key === 'string') { // span div p
+  if (typeof type === 'string') { // span div p
     tag = HostComponent; // 标签等于原生组建
   }
   const fiber = createFiber(tag, props, key);

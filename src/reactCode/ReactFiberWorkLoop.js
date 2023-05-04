@@ -1,5 +1,8 @@
 import { createWorkInProgress } from './ReactFiber';
 import { beginWork } from './ReactFiberBeginWork';
+import { completeWork } from './ReactFiberCompleteWork';
+import { Placement } from './ReactFiberFlags';
+import { HostComponent, HostRoot } from './ReactWorkTags';
 // 当前正在更新的根
 let workInProgressRoot = null;
 
@@ -22,7 +25,52 @@ export function scheduleUpdateOnFiber (fiber) {
 function performSyncWorkOnRoot (fiberRoot) {
   workInProgressRoot = fiberRoot;
   workInProgress = createWorkInProgress(workInProgressRoot.current);
-  workLoopSync();
+  console.log(workInProgress, 'workInProgress');
+  workLoopSync(); // 执行工作循环，构建副作用链
+  commitRoot(); // 提交，修改DOM
+}
+
+function commitRoot () {
+  // 指向新构建的fiber树
+  const finishedWork = workInProgressRoot.current.alternate;
+  workInProgressRoot.finishedWork = finishedWork;
+  commitMutationEffects(workInProgressRoot);
+}
+
+function commitMutationEffects (root) {
+  const finishedWork = root.finishedWork;
+  const nextEffect = finishedWork.firstEffect;
+  let effectsList = '';
+  while (nextEffect) {
+    effectsList += `(${nextEffect.tag}#${nextEffect.type}#${nextEffect.key})`;
+    const flags = nextEffect.flags;
+    if (flags === Placement) {
+      commitPlacement(nextEffect);
+    }
+    nextEffect = nextEffect.nextEffect;
+  }
+  effectsList += 'null';
+  root.current = finishedWork;
+}
+
+function getParentStateNode (fiber) {
+  let parent = fiber.return;
+  do {
+    if (parent.tag === HostComponent) {
+      return parent.stateNode;
+    } else if (parent.tag === HostRoot) {
+      return parent.stateNode.containerInfo;
+    } else {
+      // 函数组件或类组件
+      parent = parent.return;
+    }
+  } while (parent)
+}
+
+function commitPlacement (nextEffect) {
+  const stateNode = nextEffect.stateNode;
+  const parentStateNode = getParentStateNode(nextEffect);
+  parentStateNode.appendChild(stateNode);
 }
 
 /**
@@ -43,13 +91,72 @@ function performUnitWork (unitOfWork) {
   const current = unitOfWork.alternate;
   // 开始构建当前fiber的子fiber链表
   // 它会返回下一个要处理的fiber，一般都是unitOfWork的大儿子
+  // div#title这个fiber它的返回值是一个null
   const next = beginWork(current, unitOfWork);
+  // 在beginWork后，需要把新属性同步到老属性上
+  // div id = 1 变成 id = 2 memorizedProps={id：2} pendingProps={id：1}
+  unitOfWork.memorizedProps = unitOfWork.pendingProps;
   // 当前的fiber还有子节点
   if (next) {
     workInProgress = next;
   } else {
     // 如果当前fiber没有子fiber，那么当前的fiber就算完成
-    // completeUnitOfWork(unitOfWork);
+    completeUnitOfWork(unitOfWork);
+  }
+}
+
+/**
+ * 完成一个fiber节点
+ * @param {*} unitOfWork
+ */
+function completeUnitOfWork (unitOfWork) {
+  let completedWork = unitOfWork;
+  do {
+    const current = completedWork.alternate;
+    const returnFiber = completedWork.return;
+    // 完成此fiber对应的真实DOM节点创建和属性赋值的功能
+    completeWork(current, completedWork);
+    // 收集当前fiber的副作用到父fiber上
+    collectEffectList(returnFiber, completedWork);
+    // 当自己这个fiber完成后，如何寻找下个要构建的fiber
+    const siblingFiber = completedWork.sibling;
+    if (siblingFiber) {
+      // 如果有弟弟，就开始构建弟弟，处理弟弟 beginwork
+      workInProgress = siblingFiber;
+      return;
+    }
+    // 如果没有弟弟，说明这是最后一个儿子，父亲也可以完成了
+    // 这个循环到最后的时候，returnFiber就是null，也就是根fiber的父亲
+    completedWork = returnFiber;
+    // 不停的修改当前正在处理的fiber，最后workInProgress=null 就可以退出workLoop了
+    workInProgress = completedWork;
+  } while (workInProgress)
+}
+
+function collectEffectList (returnFiber, completedWork) {
+  if (returnFiber) {
+    if (!returnFiber.firstEffect) {
+      returnFiber.firstEffect = completedWork.firstEffect;
+    }
+    // 如果自己有链表尾
+    if (completedWork.lastEffect) {
+      // 并且父亲也有链表尾
+      if (returnFiber.lastEffect) {
+        // 把自己身上的effectList挂接到父亲的链表尾部
+        returnFiber.lastEffect.nextEffect = completedWork.firstEffect;
+      }
+      returnFiber.lastEffect = completedWork.lastEffect;
+    }
+    const flags = completedWork.flags;
+    // 如果此完成的fiber有副作用，那么就需要添加到effectList里
+    if (flags) {
+      // 如果父fiber有lastEffect的话，说明父fiber已经有effect链表
+      if (returnFiber.lastEffect) {
+        returnFiber.lastEffect.nextEffect = completedWork;
+      } else {
+        returnFiber.firstEffect = completedWork;
+      }
+    }
   }
 }
 

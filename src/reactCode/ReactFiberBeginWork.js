@@ -1,5 +1,6 @@
 import { HostRoot, HostComponent } from './ReactWorkTags';
 import { reconcileChildFibers, mountChildFibers } from './ReactChildFiber';
+import { shouldSetTextContent } from './ReactDomHostConfig';
 
 export function beginWork (current, workInProgress) {
   switch (workInProgress.tag) {
@@ -7,6 +8,8 @@ export function beginWork (current, workInProgress) {
       return updateHostRoot(current, workInProgress);
     case HostComponent:
       return updateHostComponent(current, workInProgress);
+    default:
+      break;
   }
 }
 
@@ -29,8 +32,13 @@ function updateHostComponent (current, workInProgress) {
   const type = workInProgress.type;
   // 新属性
   const nextProps = workInProgress.pendingProps;
-  const nextChildren = nextProps.children;
+  let nextChildren = nextProps.children;
   // 在react中，如果一个原生组件，它只有一个儿子，并且这个儿子是一个字符串的话，
+  // 不会对此儿子创建一个fiber节点，而是把它当成一个属性来处理
+  const isDirectTextChild = shouldSetTextContent(type, nextProps);
+  if (isDirectTextChild) {
+    nextChildren = null;
+  }
   // 处理子节点，根据老fiber和新的虚拟DOM进行对比，创建新的fiber树
   reconcileChildren(current, workInProgress, nextChildren);
   return workInProgress.child;

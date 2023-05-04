@@ -31,5 +31,5 @@ function childReconciler (shouldTrackSideEffects) {
   return reconcilerChildFibers;
 }
 
-export const reconcilerChildFibers = childReconciler(true);
+export const reconcileChildFibers = childReconciler(true);
 export const mountChildFibers = childReconciler(false);
