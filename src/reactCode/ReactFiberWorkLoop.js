@@ -1,8 +1,8 @@
 import { createWorkInProgress } from './ReactFiber';
 import { beginWork } from './ReactFiberBeginWork';
 import { completeWork } from './ReactFiberCompleteWork';
-import { Placement } from './ReactFiberFlags';
-import { HostComponent, HostRoot } from './ReactWorkTags';
+import { Deletion, Placement, Update, PlacementAndUpdate } from './ReactFiberFlags';
+import { commitPlacement, commitDeletion, commitWork } from './ReactFiberCommitWork';
 // 当前正在更新的根
 let workInProgressRoot = null;
 
@@ -37,40 +37,45 @@ function commitRoot () {
   commitMutationEffects(workInProgressRoot);
 }
 
+function getFlags (flags) {
+  switch (flags) {
+    case Placement:
+      return '插入';
+    case Update:
+      return '更新';
+    case PlacementAndUpdate:
+      return '移动';
+    case Deletion:
+      return '删除';
+    default:
+      break;
+  }
+}
+
 function commitMutationEffects (root) {
   const finishedWork = root.finishedWork;
-  const nextEffect = finishedWork.firstEffect;
+  let nextEffect = finishedWork.firstEffect;
   let effectsList = '';
   while (nextEffect) {
-    effectsList += `(${nextEffect.tag}#${nextEffect.type}#${nextEffect.key})`;
+    effectsList += `(${getFlags(nextEffect.flags)}#${nextEffect.type}#${nextEffect.key})`;
     const flags = nextEffect.flags;
+    const current = nextEffect.alternate;
     if (flags === Placement) {
       commitPlacement(nextEffect);
+    } else if (flags === PlacementAndUpdate) {
+      commitPlacement(nextEffect);
+      nextEffect.flags = Update;
+      commitWork(current, nextEffect);
+    } else if (flags === Update) {
+      commitWork(current, nextEffect);
+    } else if (flags === Deletion) {
+      commitDeletion(nextEffect);
     }
     nextEffect = nextEffect.nextEffect;
   }
   effectsList += 'null';
+  console.log(effectsList, 'effectsList');
   root.current = finishedWork;
-}
-
-function getParentStateNode (fiber) {
-  let parent = fiber.return;
-  do {
-    if (parent.tag === HostComponent) {
-      return parent.stateNode;
-    } else if (parent.tag === HostRoot) {
-      return parent.stateNode.containerInfo;
-    } else {
-      // 函数组件或类组件
-      parent = parent.return;
-    }
-  } while (parent)
-}
-
-function commitPlacement (nextEffect) {
-  const stateNode = nextEffect.stateNode;
-  const parentStateNode = getParentStateNode(nextEffect);
-  parentStateNode.appendChild(stateNode);
 }
 
 /**

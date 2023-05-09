@@ -4,7 +4,7 @@
         "compounds": []
     },
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": false
     }, // 每次保存的时候将代码按eslint格式进行修复
     // "editor.formatOnSave": true
 }

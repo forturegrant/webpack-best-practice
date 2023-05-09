@@ -55,7 +55,7 @@ export function reconcileChildren (current, workInProgress, nextChildren) {
   } else {
     workInProgress.child = mountChildFibers(
       workInProgress, // 新fiber
-      current && current.child,
+      null,
       nextChildren
     );
   }

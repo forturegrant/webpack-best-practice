@@ -11,6 +11,7 @@ export function updateContainer (element, container) {
   // 正常来说一个fiber节点会对应一个真实的dom节点，hostRootFiber对应的DOM节点就是containerInfo div#root
   const current = container.current;
   const update = createUpdate();
+  console.log(element, 'element');
   update.payload = { element };
   enqueneUpdate(current, update);
   scheduleUpdateOnFiber(current);
