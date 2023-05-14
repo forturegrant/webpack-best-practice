@@ -31,7 +31,7 @@ export default class App extends React.Component {
             <div><Index /></div>
             <div><CC /></div>
             <div><Ahooks /></div>
-            {/* <div><Boom isShow /></div> */}
+            <div><Boom isShow /></div>
             {/* <div><Dong /></div> */}
         </div>
     }
