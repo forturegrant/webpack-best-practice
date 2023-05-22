@@ -24,21 +24,21 @@ import { ReactDOM } from '../reactCode/react';
 //   console.log("do something...");
 // }
 
-render(<App />, document.getElementById("root"));
+// render(<App />, document.getElementById("root"));
 
 // // d.ts
 // getName(1)
 
-registerMicroApps([
-  {
-    name: "vueApp",
-    entry: "//localhost:8000",
-    container: "#container",
-    activeRule: "/app-vue",
-  },
-]);
-// 启动 qiankun
-start();
+// registerMicroApps([
+//   {
+//     name: "vueApp",
+//     entry: "//localhost:8000",
+//     container: "#container",
+//     activeRule: "/app-vue",
+//   },
+// ]);
+// // 启动 qiankun
+// start();
 
 // const obj2: fn2 = () => {};
 // const obj1: fn1 = () => {
@@ -132,5 +132,3 @@ single4Update.addEventListener('click', () => {
   )
   ReactDOM.render(element, document.getElementById('root'));
 })
-
-

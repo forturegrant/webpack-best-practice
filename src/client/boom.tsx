@@ -145,9 +145,6 @@ function Fireworks({ isShow }) {
         clearCanvas();
         for (let i = 0; i < cardList.length; ++i) {
           const card = cardList[i];
-          console.log(card.y, 'card.y');
-          console.log(card.ay, 'card.ay');
-          console.log(card.vy, 'card.vy');
           card.x += card.vx;
           card.vy += card.ay;
           card.y += card.vy;
