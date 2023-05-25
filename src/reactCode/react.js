@@ -17,7 +17,7 @@ export const ReactDOM = {
 
 // createFiberRoot  创建fiberRootNode（真实dom，id = 'root'）和hostRootFiber（stateNode指向fiberRootNode）
 
-function  createFiberRoot (containerInfo) {
+function createFiberRoot (containerInfo) {
   const fiberRoot = { containerInfo }; // fiberRoot指的就是容器对象containerInfo  div#root
   const hostRootFiber = createHostRootFiber(); // 创建fiber树的根节点   这两个对应上面说的
   // 当前fiberRoot的current指向这个根fiber
