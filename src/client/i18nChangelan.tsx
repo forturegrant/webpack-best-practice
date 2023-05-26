@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 
 const lngs = {

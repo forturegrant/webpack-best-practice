@@ -14,6 +14,7 @@ import Ahooks from './ahooks';
 import Boom from './boom';
 import I18N from './i18nText';
 import I18NChangelan from './i18nChangelan';
+import { i18nOut } from './utils';
 
 // import  from 'monaco-editor';
 
@@ -35,8 +36,11 @@ export default class App extends React.Component {
             <div><Ahooks /></div>
             <div><Boom isShow /></div>
             <I18NChangelan />
-            {/* <I18N /> */}
+            <I18N />
             {/* <div><Dong /></div> */}
         </div>
+    }
+    componentDidMount(): void {
+        console.log(i18nOut());
     }
 }
