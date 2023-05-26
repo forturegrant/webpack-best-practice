@@ -12,6 +12,8 @@ import CC from './classComponent';
 import Dong from './dong';
 import Ahooks from './ahooks';
 import Boom from './boom';
+import I18N from './i18nText';
+import I18NChangelan from './i18nChangelan';
 
 // import  from 'monaco-editor';
 
@@ -32,6 +34,8 @@ export default class App extends React.Component {
             <div><CC /></div>
             <div><Ahooks /></div>
             <div><Boom isShow /></div>
+            <I18NChangelan />
+            {/* <I18N /> */}
             {/* <div><Dong /></div> */}
         </div>
     }

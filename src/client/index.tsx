@@ -6,6 +6,7 @@ import App from "./app";
 // import _ from "lodash";
 import { registerMicroApps, start, loadMicroApp } from "qiankun";
 import { ReactDOM } from '../reactCode/react';
+import './i18n.js';
 
 // console.log(_.join(["a", "b", "c"], "***"));
 
@@ -24,7 +25,7 @@ import { ReactDOM } from '../reactCode/react';
 //   console.log("do something...");
 // }
 
-// render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById("root"));
 
 // // d.ts
 // getName(1)
