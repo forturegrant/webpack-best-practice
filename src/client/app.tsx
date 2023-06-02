@@ -15,6 +15,7 @@ import Boom from './boom';
 import I18N from './i18nText';
 import I18NChangelan from './i18nChangelan';
 import { i18nOut } from './utils';
+import ErrorBoundary from './errorBoundary';
 
 // import  from 'monaco-editor';
 
@@ -37,6 +38,7 @@ export default class App extends React.Component {
             <div><Boom isShow /></div>
             <I18NChangelan />
             <I18N />
+            <ErrorBoundary />
             {/* <div><Dong /></div> */}
         </div>
     }
