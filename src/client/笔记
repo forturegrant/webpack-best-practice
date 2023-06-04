@@ -1,9 +1,0 @@
-domdiff是计算老fiber和新的vdom的差异
-domdiff是在收集副作用链 effectList
-
-更新两个阶段
-    render  根据老的fiber树和新的vdom创建新的fiber树并找出差异，也就是diff的结果
-    commit  根据diff结果更新真实DOM
-    更新完了以后新的fiber树就成为fiberRoot.current
-commit阶段不能中断
-render阶段可以中断
