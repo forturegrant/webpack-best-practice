@@ -13,13 +13,7 @@ import Dong from "./dong";
 import Ahooks from "./ahooks";
 import Boom from "./boom";
 import Demo from "./useLayoutEffect";
-import SuspensePacking from './suspensePacking';
-import TestAsync from './useAsync';
-import Index from './useIndex';
-import CC from './classComponent';
-import Dong from './dong';
-import Ahooks from './ahooks';
-import Boom from './boom';
+
 import I18N from './i18nText';
 import I18NChangelan from './i18nChangelan';
 import { i18nOut } from './utils';
@@ -55,6 +49,9 @@ export default class App extends React.Component {
         <div>
           <Boom isShow />
         </div>
+        <I18NChangelan />
+        <I18N />
+        <ErrorBoundary />
         {/* <div><Dong /></div> */}
         <div>
           <Demo />
@@ -62,19 +59,8 @@ export default class App extends React.Component {
       </div>
     );
   }
-            {/* <MonacoEditor /> */}
-            <div><TestAsync /></div>
-            <div><Index /></div>
-            <div><CC /></div>
-            <div><Ahooks /></div>
-            <div><Boom isShow /></div>
-            <I18NChangelan />
-            <I18N />
-            <ErrorBoundary />
-            {/* <div><Dong /></div> */}
-        </div>
-    }
-    componentDidMount(): void {
-        console.log(i18nOut());
-    }
+
+  componentDidMount(): void {
+      console.log(i18nOut());
+  }
 }
