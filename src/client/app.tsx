@@ -61,6 +61,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount(): void {
-      console.log(i18nOut());
+    console.log(i18nOut());
   }
 }
