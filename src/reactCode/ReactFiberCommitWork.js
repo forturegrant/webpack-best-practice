@@ -24,10 +24,10 @@ export function commitPlacement (nextEffect) {
 
 export function commitWork (current, finishedWork) {
   const updatePayload = finishedWork.updateQuene;
-  finishedWork.updateQuene = null;
+  // finishedWork.updateQuene = null;
   if (updatePayload) {
     updateProperties(finishedWork.stateNode, updatePayload);
-  }
+  } 
 }
 
 export function commitDeletion (fiber) {

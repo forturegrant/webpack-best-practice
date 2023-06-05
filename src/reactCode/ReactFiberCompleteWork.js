@@ -57,6 +57,6 @@ function updateHostComponent(current, workInProgress, tag, newProps) {
 }
 
 /**
- * 根fiber rootFiber updateQuene 上面是一个环状链表 update {payload: element}
+ * 根fiber rootFiber updateQuene.shared.pending 上面是一个环状链表 update {payload: element}
  * 原生组件fiber HostComponent updateQuene=updatePayload 数组[ key1, value1, key2, value2]
  */

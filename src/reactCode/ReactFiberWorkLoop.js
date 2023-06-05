@@ -59,7 +59,6 @@ function commitMutationEffects (root) {
   while (nextEffect) {
     effectsList += `(${getFlags(nextEffect.flags)}#${nextEffect.type}#${nextEffect.key})`;
     const flags = nextEffect.flags;
-    debugger;
     const current = nextEffect.alternate;
     if (flags === Placement) {
       commitPlacement(nextEffect);
@@ -76,6 +75,7 @@ function commitMutationEffects (root) {
   }
   effectsList += 'null';
   console.log(effectsList, 'effectsList');
+  console.log(finishedWork, 'finishedWork');
   root.current = finishedWork;
 }
 

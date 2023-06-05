@@ -25,7 +25,7 @@ import './i18n.js';
 //   console.log("do something...");
 // }
 
-render(<App />, document.getElementById("root"));
+// render(<App />, document.getElementById("root"));
 
 // // d.ts
 // getName(1)
