@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   mode: 'development',
@@ -51,6 +52,10 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css'
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'disabled', // 不启动展示打包报告的HTTP服务器
+      generateStatsFile: true // 要生成stats.json文件
     })
   ],
   devServer: {
