@@ -16,7 +16,7 @@ module.exports = {
   },
   // externals: {
   //   lodash: "_",
-  // }, 
+  // },
   module: {
     rules: [
       {
@@ -33,9 +33,25 @@ module.exports = {
         // 命中 less 文件
         test: /\.less$/,
         // 从右到左依次使用 less-loader、css-loader、style-loader
-        use: [this.mode === 'dev' ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+        use: [
+          this.mode === 'dev' ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader'
+        ],
         // 排除 node_modules 下面的 less 文件
         exclude: '/node_modules/'
+      },
+      {
+        test: /\.png|jpg|gif|jpeg|svg/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024
+          }
+        },
+        generator: {
+          filename: 'images/[base]'
+        }
       },
       {
         test: /\.md$/,

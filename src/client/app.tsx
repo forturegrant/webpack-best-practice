@@ -18,6 +18,9 @@ import I18N from './i18nText';
 import I18NChangelan from './i18nChangelan';
 import { i18nOut } from './utils';
 import ErrorBoundary from './errorBoundary';
+import VirList from "./vitualListIWithActualHeight";
+import VirListNoHeight from "./vitualListWithNoHeight";
+import Label from "../assets/label.svg";
 
 // import  from 'monaco-editor';
 
@@ -49,13 +52,20 @@ export default class App extends React.Component {
         <div>
           <Boom isShow />
         </div>
-        <I18NChangelan />
-        <I18N />
-        <ErrorBoundary />
+        {/* <I18NChangelan /> */}
+        {/* <I18N /> */}
+        {/* <ErrorBoundary /> */}
         {/* <div><Dong /></div> */}
         <div>
           <Demo />
         </div>
+        {/* <div>
+          <VirList />
+        </div> */}
+        <div>
+          <VirListNoHeight />
+        </div>
+        <img src={Label} />
       </div>
     );
   }
