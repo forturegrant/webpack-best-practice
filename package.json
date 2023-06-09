@@ -1,5 +1,6 @@
 {
   "name": "webpack-best-practice",
+  "sideEffects": false,
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.22.1",

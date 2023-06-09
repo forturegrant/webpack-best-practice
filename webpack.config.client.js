@@ -8,15 +8,19 @@ module.exports = {
   entry: {
     main: path.join(__dirname, 'src/client/index.tsx')
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'eval-cheap-module-source-map',
   output: {
     // filename: 'bundle.js',
     path: `${__dirname}/dist`
     // publicPath: '/public'
   },
-  // externals: {
-  //   lodash: "_",
-  // },
+  optimization: {
+    usedExports: true,
+    minimize: true
+  },
+  externals: {
+    lodash: "_",
+  },
   module: {
     rules: [
       {
@@ -35,7 +39,7 @@ module.exports = {
         // 从右到左依次使用 less-loader、css-loader、style-loader
         use: [
           this.mode === 'dev' ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          'css-loader'
           'less-loader'
         ],
         // 排除 node_modules 下面的 less 文件

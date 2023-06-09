@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import App from "./app";
-// import { add, getName } from "./math";
+import { addNumber, getName } from "./math";
 // //@ts-ignore
 // import _ from "lodash";
 import { registerMicroApps, start, loadMicroApp } from "qiankun";
@@ -10,7 +10,7 @@ import './i18n.js';
 
 // console.log(_.join(["a", "b", "c"], "***"));
 
-// add(1, 2);
+addNumber(1, 2);
 
 // const a = <T,>(value: T): T => value;
 
