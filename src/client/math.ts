@@ -1,8 +1,8 @@
-export const add = (a, b) => {
+export const addNumber = (a, b) => {
   console.log(a + b)
 }
 
-export const minus = (a, b) => {
+export const minusNumber = (a, b) => {
   console.log(a - b)
 }
 
