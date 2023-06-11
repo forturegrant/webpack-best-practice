@@ -1,4 +1,4 @@
-import React from "rhttps://github.com/forturegrant/hanjin-nice.giteact";
+import React from "react";
 
 export default class App extends React.Component {
   render() {

@@ -16,7 +16,7 @@ import Demo from "./useLayoutEffect";
 
 import I18N from "./i18nText";
 import I18NChangelan from "./i18nChangelan";
-import { i18nOut } from "./utils";
+import { i18nOut } from "@/client/utils";
 import ErrorBoundary from "./errorBoundary";
 import VirList from "./vitualListIWithActualHeight";
 import VirListNoHeight from "./vitualListWithNoHeight";
