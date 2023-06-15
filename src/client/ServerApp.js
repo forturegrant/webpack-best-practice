@@ -9,5 +9,5 @@ export default <App />;
  * @param { * } abc
  */
 function test(abc) {
-    return 1
+  return 1;
 }
