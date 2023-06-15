@@ -39,7 +39,7 @@ module.exports = {
         // 从右到左依次使用 less-loader、css-loader、style-loader
         use: [
           this.mode === 'dev' ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader'
+          'css-loader',
           'less-loader'
         ],
         // 排除 node_modules 下面的 less 文件

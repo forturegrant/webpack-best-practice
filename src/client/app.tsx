@@ -21,6 +21,7 @@ import ErrorBoundary from './errorBoundary';
 import VirList from "./vitualListIWithActualHeight";
 import VirListNoHeight from "./vitualListWithNoHeight";
 import Label from "../assets/label.svg";
+import ArrowFunctionRerender from './arrowFunctionRerender';
 
 // import  from 'monaco-editor';
 
@@ -66,6 +67,9 @@ export default class App extends React.Component {
           <VirListNoHeight />
         </div>
         <img src={Label} />
+        <div>
+          <ArrowFunctionRerender />
+        </div>
       </div>
     );
   }
