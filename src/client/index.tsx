@@ -5,14 +5,18 @@ import { addNumber, getName } from "./math";
 // //@ts-ignore
 // import _ from "lodash";
 import { registerMicroApps, start, loadMicroApp } from "qiankun";
-import { ReactDOM } from '../reactCode/react';
-import './i18n.js';
+import { ReactDOM } from "../reactCode/react";
+import "./i18n.js";
 
 // console.log(_.join(["a", "b", "c"], "***"));
 
 addNumber(1, 2);
 
 // const a = <T,>(value: T): T => value;
+
+function a<T>(value: T): T {
+  return value;
+}
 
 // console.log(a(2), "aa");
 
@@ -57,7 +61,6 @@ render(<App />, document.getElementById("root"));
 // getName('zzp');
 // MyPlugin.f('1');
 // customGetAgeFunction(18);
-
 
 // reactCode
 // const single1 = document.getElementById('single1');
