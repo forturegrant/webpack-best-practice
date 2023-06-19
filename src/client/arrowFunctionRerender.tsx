@@ -12,8 +12,6 @@ class Child extends React.PureComponent {
   }
 }
 
-window.a = 1;
-
 class App extends React.Component {
   constructor(props) {
     super(props)
