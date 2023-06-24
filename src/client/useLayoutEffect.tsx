@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 function App() {
   const [count, setCount] = useState(0);
 
@@ -10,7 +10,7 @@ function App() {
     }
   }, [count]);
 
-  return <div onClick={() => setCount(0)}>{count}</div>;
+  return <div onClick={() => setCount(0)}>Demo{count}</div>;
 }
 
 export default App;
