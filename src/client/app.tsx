@@ -22,6 +22,8 @@ import VirList from './vitualListIWithActualHeight';
 import Label from '../assets/label.svg';
 import ArrowFunctionRerender from './arrowFunctionRerender';
 import UseStateFunc from './useStateFunc';
+import UseStateClourse from './useStateClourse';
+import UseStateClourseAhooks from './useStateClourseAhooks';
 
 // import  from 'monaco-editor';
 
@@ -84,6 +86,8 @@ const App = () => {
       <div>
         <UseStateFunc />
       </div>
+      <div>{/* <UseStateClourse /> */}</div>
+      <div>{/* <UseStateClourseAhooks /> */}</div>
       <div>
         <Dong />
       </div>

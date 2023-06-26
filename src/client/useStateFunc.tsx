@@ -4,20 +4,20 @@ import useSyncCallback from './useSyncCallback';
 function Counter() {
   const [count, setCount] = useState(0);
 
-  function handleClick1() {
-    setCount(count + 1);
-    // func()
-    // setCount(count + 1);
-    setCount(prevCount => prevCount + 1);
-  }
+  // 这样子拿不到最新的状态
+  // const func = () => {
+  //   console.log(count);
+  // };
 
+  // 这样子可以拿到最新的状态，或者useEffect里面拿
   const func = useSyncCallback(() => {
     console.log(count);
   });
 
-  // const func = () => {
-  //   console.log(count);
-  // };
+  function handleClick1() {
+    setCount(count + 1);
+    func();
+  }
 
   return (
     <div>
