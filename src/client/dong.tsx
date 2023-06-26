@@ -43,18 +43,18 @@ function Dong() {
     }, []);
 
 
-    const fn = () => {
-        console.log(count);
-    };
-    const ref = useRef(fn);
+    // const fn = () => {
+    //     console.log(count);
+    // };
+    // const ref = useRef(fn);
 
-    useLayoutEffect(() => {
-        ref.current = fn;
-    });
+    // useLayoutEffect(() => {
+    //     ref.current = fn;
+    // });
 
-    useEffect(() => {
-        setInterval(() => ref.current(), 500);
-    }, []);
+    // useEffect(() => {
+    //     setInterval(() => ref.current(), 500);
+    // }, []);
 
     return <div>{count}</div>;
 }

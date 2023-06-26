@@ -22,6 +22,7 @@ import VirList from "./vitualListIWithActualHeight";
 import VirListNoHeight from "./vitualListWithNoHeight";
 import Label from "../assets/label.svg";
 import ArrowFunctionRerender from './arrowFunctionRerender';
+import UseStateFunc from './useStateFunc';
 
 // import  from 'monaco-editor';
 
@@ -69,6 +70,12 @@ export default class App extends React.Component {
         <img src={Label} />
         <div>
           <ArrowFunctionRerender />
+        </div>
+        <div>
+          <UseStateFunc />
+        </div>
+        <div>
+          <Dong />
         </div>
       </div>
     );
