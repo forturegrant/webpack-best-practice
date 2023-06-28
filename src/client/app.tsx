@@ -24,6 +24,7 @@ import ArrowFunctionRerender from './arrowFunctionRerender';
 import UseStateFunc from './useStateFunc';
 import UseStateClourse from './useStateClourse';
 import UseStateClourseAhooks from './useStateClourseAhooks';
+import UseRequest from './useRequest';
 
 // import  from 'monaco-editor';
 
@@ -93,6 +94,9 @@ const App = () => {
       </div>
       <div>
         <ArrowFunctionRerender />
+      </div>
+      <div>
+        <UseRequest />
       </div>
     </div>
   );
