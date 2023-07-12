@@ -25,6 +25,7 @@ import UseStateFunc from './useStateFunc';
 import UseStateClourse from './useStateClourse';
 import UseStateClourseAhooks from './useStateClourseAhooks';
 import UseRequest from './useRequest';
+import VirListMySelf from './vitualListMySelf';
 
 // import  from 'monaco-editor';
 
@@ -64,20 +65,20 @@ const App = () => {
       <div>
         <Ahooks />
       </div>
-      <div>
+      {/* <div>
         <Boom isShow />
-      </div>
+      </div> */}
       {/* <I18NChangelan /> */}
       {/* <I18N /> */}
       {/* <ErrorBoundary /> */}
       {/* <div><Dong /></div> */}
       <div>{Demo ? <Demo /> : null}</div>
-      {/* <div>
+      <div>
         <VirList />
-      </div> */}
-      <Suspense>
+      </div>
+      {/* <Suspense>
         <VirListNoHeight />
-      </Suspense>
+      </Suspense> */}
       <div>
         <img src={Label} />
       </div>
@@ -95,8 +96,13 @@ const App = () => {
       <div>
         <ArrowFunctionRerender />
       </div>
+      <div>{/* <UseRequest /> */}</div>
       <div>
-        <UseRequest />
+        <VirListMySelf
+          arr={Array(1000)
+            .fill(1)
+            .map((item, index) => index + 1)}
+        />
       </div>
     </div>
   );
