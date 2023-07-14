@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo, useCallback, useRef } from "react";
+import React, { memo, useState, useMemo, useCallback, useRef } from 'react';
 
 // 有确定高度
 const VirList3 = memo(function ({
@@ -54,11 +54,11 @@ const VirList3 = memo(function ({
             data={i}
             key={i}
             style={{
-              width: "100%",
-              height: itemHeight - 1 + "px",
-              borderBottom: "1px solid #aaa",
-              position: "absolute",
-              top: i * itemHeight + "px",
+              width: '100%',
+              height: itemHeight - 1 + 'px',
+              borderBottom: '1px solid #aaa',
+              position: 'absolute',
+              top: i * itemHeight + 'px',
               left: 0,
               right: 0,
             }}
@@ -74,28 +74,30 @@ const VirList3 = memo(function ({
     <div
       className="container"
       style={{
-        height: containerHeight + "px",
-        overflowY: "auto",
-        overflowX: "hidden"
+        height: containerHeight + 'px',
+        overflowY: 'auto',
+        overflowX: 'hidden',
       }}
       ref={ContainerRef}
       onScroll={handleSrcoll}
     >
-      <div 
+      <div
         className="listBox"
-        style={{ 
-          height: wraperHeight + "px", 
-          backgroundColor: "pink", 
-          position: "relative"
-        }}>
-          {renderList()}</div>
+        style={{
+          height: wraperHeight + 'px',
+          backgroundColor: 'pink',
+          position: 'relative',
+        }}
+      >
+        {renderList()}
+      </div>
     </div>
   );
 });
 
 const VirList = () => {
   const [items] = useState(Array(10000).fill(1));
-  const ItemBox = memo(function ({ data = "", index = 0, style = {} }) {
+  const ItemBox = memo(function ({ data = '', index = 0, style = {} }) {
     return (
       <div style={style} id={`item-${index}`}>
         {data}
@@ -110,6 +112,5 @@ const VirList = () => {
 };
 
 // 无确定高度
-
 
 export default VirList;

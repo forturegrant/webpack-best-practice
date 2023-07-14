@@ -18,7 +18,7 @@ async function getArticle(): Promise<{ data: string; time: number }> {
 const Article = () => {
   const [count, setCount] = useState(1);
   const { data, loading } = useRequest(getArticle, {
-    cacheKey: 'cacheKey-demo'
+    cacheKey: 'cacheKey-demo',
   });
   if (!data && loading) {
     return <p>Loading</p>;
@@ -28,8 +28,8 @@ const Article = () => {
   return (
     <>
       <p>Background loading: {loading ? 'true' : 'false'}</p>
-      <p>Latest request time: {data?.time}</p>
-      <p>{data?.data}</p>
+      <p>Latest request time: {data.time}</p>
+      <p>{data.data}</p>
     </>
   );
 };
