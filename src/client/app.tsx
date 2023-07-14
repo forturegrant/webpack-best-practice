@@ -25,6 +25,7 @@ import UseStateFunc from './useStateFunc';
 import UseStateClourse from './useStateClourse';
 import UseStateClourseAhooks from './useStateClourseAhooks';
 import UseRequest from './useRequest';
+import Carousel from './carousel';
 
 // import  from 'monaco-editor';
 
@@ -97,6 +98,9 @@ const App = () => {
       </div>
       <div>
         <UseRequest />
+      </div>
+      <div>
+        <Carousel />
       </div>
     </div>
   );
