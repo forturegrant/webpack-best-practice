@@ -1,13 +1,16 @@
-import { HostRoot, HostComponent } from './ReactWorkTags';
+import { HostRoot, HostComponent, FunctionComponent } from './ReactWorkTags';
 import { reconcileChildFibers, mountChildFibers } from './ReactChildFiber';
 import { shouldSetTextContent } from './ReactDomHostConfig';
+import { Placement } from './ReactFiberFlags';
 
-export function beginWork (current, workInProgress) {
+export function beginWork(current, workInProgress) {
   switch (workInProgress.tag) {
     case HostRoot:
       return updateHostRoot(current, workInProgress);
     case HostComponent:
       return updateHostComponent(current, workInProgress);
+    case FunctionComponent:
+      return updateFunctionComponent(current, workInProgress);
     default:
       break;
   }
@@ -18,7 +21,7 @@ export function beginWork (current, workInProgress) {
  * @param {*} current
  * @param {*} workInProgress
  */
-function updateHostRoot (current, workInProgress) {
+function updateHostRoot(current, workInProgress) {
   const updateQuene = workInProgress.updateQuene;
   const nextChildren = updateQuene.shared.pending.payload.element;
   // 处理子节点，根据老fiber和新的虚拟dom进行对比，创建新的fiber树
@@ -27,7 +30,7 @@ function updateHostRoot (current, workInProgress) {
   return workInProgress.child;
 }
 
-function updateHostComponent (current, workInProgress) {
+function updateHostComponent(current, workInProgress) {
   // 获取此原生组件的类型 span p
   const type = workInProgress.type;
   // 新属性
@@ -44,7 +47,14 @@ function updateHostComponent (current, workInProgress) {
   return workInProgress.child;
 }
 
-export function reconcileChildren (current, workInProgress, nextChildren) {
+function updateFunctionComponent(current, workInProgress) {
+  const { type, props } = workInProgress;
+  const children = type(props);
+  reconcileChildren(current, workInProgress, children);
+  return workInProgress.child;
+}
+
+export function reconcileChildren(current, workInProgress, nextChildren) {
   // 如果current有值，说明这是更新
   if (current) {
     workInProgress.child = reconcileChildFibers(

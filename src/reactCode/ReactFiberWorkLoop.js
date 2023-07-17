@@ -13,7 +13,7 @@ let workInProgress = null;
  * 不管如何更新，不管谁来更新，都会调度到这个方法里
  * @param {*} fiber
  */
-export function scheduleUpdateOnFiber (fiber) {
+export function scheduleUpdateOnFiber(fiber) {
   const fiberRoot = markUpdateLaneFromFiberToRoot(fiber);
   performSyncWorkOnRoot(fiberRoot);
 }
@@ -22,7 +22,7 @@ export function scheduleUpdateOnFiber (fiber) {
  * 根据老的fiber树和更新对象创建新的fiber树，然后根据新的fiber树去更新真实DOM
  * @param {*} fiberRoot
  */
-function performSyncWorkOnRoot (fiberRoot) {
+function performSyncWorkOnRoot(fiberRoot) {
   workInProgressRoot = fiberRoot;
   workInProgress = createWorkInProgress(workInProgressRoot.current);
   console.log(workInProgress, 'workInProgress');
@@ -30,14 +30,14 @@ function performSyncWorkOnRoot (fiberRoot) {
   commitRoot(); // 提交，修改DOM
 }
 
-function commitRoot () {
+function commitRoot() {
   // 指向新构建的fiber树
   const finishedWork = workInProgressRoot.current.alternate;
   workInProgressRoot.finishedWork = finishedWork;
   commitMutationEffects(workInProgressRoot);
 }
 
-function getFlags (flags) {
+function getFlags(flags) {
   switch (flags) {
     case Placement:
       return '插入';
@@ -52,7 +52,7 @@ function getFlags (flags) {
   }
 }
 
-function commitMutationEffects (root) {
+function commitMutationEffects(root) {
   const finishedWork = root.finishedWork;
   let nextEffect = finishedWork.firstEffect;
   let effectsList = '';
@@ -82,7 +82,7 @@ function commitMutationEffects (root) {
 /**
  * 开始自上而下构建新的fiber树
  */
-function workLoopSync () {
+function workLoopSync() {
   while (workInProgress) {
     performUnitWork(workInProgress);
   }
@@ -92,7 +92,7 @@ function workLoopSync () {
  * 执行单个工作单元
  * workInProgress　要处理的fiber
  */
-function performUnitWork (unitOfWork) {
+function performUnitWork(unitOfWork) {
   // 获取当前正在构建的fiber的替身
   const current = unitOfWork.alternate;
   // 开始构建当前fiber的子fiber链表
@@ -115,7 +115,7 @@ function performUnitWork (unitOfWork) {
  * 完成一个fiber节点
  * @param {*} unitOfWork
  */
-function completeUnitOfWork (unitOfWork) {
+function completeUnitOfWork(unitOfWork) {
   let completedWork = unitOfWork;
   do {
     const current = completedWork.alternate;
@@ -139,7 +139,7 @@ function completeUnitOfWork (unitOfWork) {
   } while (workInProgress)
 }
 
-function collectEffectList (returnFiber, completedWork) {
+function collectEffectList(returnFiber, completedWork) {
   if (returnFiber) {
     if (!returnFiber.firstEffect) {
       returnFiber.firstEffect = completedWork.firstEffect;
@@ -166,7 +166,7 @@ function collectEffectList (returnFiber, completedWork) {
   }
 }
 
-function markUpdateLaneFromFiberToRoot (sourceFiber) {
+function markUpdateLaneFromFiberToRoot(sourceFiber) {
   let node = sourceFiber;
   let parent = node.return;
   while (parent) {

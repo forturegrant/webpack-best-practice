@@ -2,3 +2,5 @@
 export const HostRoot = 3;
 // 原生组件
 export const HostComponent = 6;
+// 函数组件
+export const FunctionComponent = 0;

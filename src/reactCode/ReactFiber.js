@@ -1,7 +1,7 @@
 import { NoFlags } from './ReactFiberFlags';
-import { HostComponent, HostRoot } from './ReactWorkTags';
+import { FunctionComponent, HostComponent, HostRoot } from './ReactWorkTags';
 
-export function createHostRootFiber () {
+export function createHostRootFiber() {
   return createFiber(HostRoot);
 }
 
@@ -13,17 +13,17 @@ export function createHostRootFiber () {
  * @param {any} key
  * @returns {any}
  */
-function createFiber (tag, pendingProps, key) {
+function createFiber(tag, pendingProps, key) {
   return new FiberNode(tag, pendingProps, key);
 }
 
-function FiberNode (tag, pendingProps, key) {
+function FiberNode(tag, pendingProps, key) {
   this.tag = tag;
   this.pendingProps = pendingProps;
   this.key = key;
 }
 
-export function createWorkInProgress (current, pendingProps) {
+export function createWorkInProgress(current, pendingProps) {
   let workInProgress = current.alternate;
   if (!workInProgress) {
     workInProgress = createFiber(current.tag, pendingProps, current.key)
@@ -47,11 +47,14 @@ export function createWorkInProgress (current, pendingProps) {
  * @param {*} element
  * @returns
  */
-export function createFiberFromElement (element) {
+export function createFiberFromElement(element) {
   const { key, type, props } = element;
   let tag;
   if (typeof type === 'string') { // span div p
     tag = HostComponent; // 标签等于原生组建
+  }
+  if (typeof type === 'function') {
+    tag = FunctionComponent;
   }
   const fiber = createFiber(tag, props, key);
   fiber.type = type;

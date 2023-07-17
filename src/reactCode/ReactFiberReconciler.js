@@ -6,7 +6,7 @@ import { scheduleUpdateOnFiber } from './ReactFiberWorkLoop';
  * @param {*} element
  * @param {*} container
  */
-export function updateContainer (element, container) {
+export function updateContainer(element, container) {
   // 获取hostRootFiber fiber根的根节点
   // 正常来说一个fiber节点会对应一个真实的dom节点，hostRootFiber对应的DOM节点就是containerInfo div#root
   const current = container.current;
