@@ -1,4 +1,4 @@
-import { HostComponent } from "./ReactWorkTags";
+import { FunctionComponent, HostComponent } from "./ReactWorkTags";
 import {
   appendChild,
   createInstance,
@@ -41,6 +41,9 @@ function appendAllChildren(parent, workInProgress) {
   while (node) {
     if (node.tag === HostComponent) {
       appendChild(parent, node.stateNode);
+    }
+    if (node.tag === FunctionComponent) {
+      appendChild(parent, node.child.stateNode);
     }
     node = node.sibling;
   }

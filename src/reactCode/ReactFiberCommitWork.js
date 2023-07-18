@@ -2,7 +2,7 @@ import { HostComponent, HostRoot } from './ReactWorkTags';
 import { appendChild, removeChild } from './ReactDOMHostConfig';
 import { updateProperties } from './ReactDOMComponent';
 
-function getParentStateNode (fiber) {
+function getParentStateNode(fiber) {
   let parent = fiber.return;
   do {
     if (parent.tag === HostComponent) {
@@ -16,21 +16,21 @@ function getParentStateNode (fiber) {
   } while (parent)
 }
 
-export function commitPlacement (nextEffect) {
+export function commitPlacement(nextEffect) {
   const stateNode = nextEffect.stateNode;
   const parentStateNode = getParentStateNode(nextEffect);
   appendChild(parentStateNode, stateNode);
 }
 
-export function commitWork (current, finishedWork) {
+export function commitWork(current, finishedWork) {
   const updatePayload = finishedWork.updateQuene;
   // finishedWork.updateQuene = null;
   if (updatePayload) {
     updateProperties(finishedWork.stateNode, updatePayload);
-  } 
+  }
 }
 
-export function commitDeletion (fiber) {
+export function commitDeletion(fiber) {
   if (!fiber) return;
   const parentStateNode = getParentStateNode(fiber);
   removeChild(parentStateNode, fiber.stateNode);
