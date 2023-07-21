@@ -25,7 +25,6 @@ export function scheduleUpdateOnFiber(fiber) {
 function performSyncWorkOnRoot(fiberRoot) {
   workInProgressRoot = fiberRoot;
   workInProgress = createWorkInProgress(workInProgressRoot.current);
-  console.log(workInProgress, 'workInProgress');
   workLoopSync(); // 执行工作循环，构建副作用链
   commitRoot(); // 提交，修改DOM
 }

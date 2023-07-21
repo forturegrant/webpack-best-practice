@@ -5,8 +5,8 @@ import { addNumber, getName } from "./math";
 // //@ts-ignore
 // import _ from "lodash";
 import { registerMicroApps, start, loadMicroApp } from "qiankun";
-import { ReactDOM } from "../reactCode/react";
-import "./i18n.js";
+import { ReactDOM, useReducer } from "../reactCode/react";
+import './i18n.js';
 
 // console.log(_.join(["a", "b", "c"], "***"));
 
@@ -104,7 +104,8 @@ single2Update.addEventListener('click', () => {
 })
 
 function Test() {
-  return <div key="title2" id="title2">11</div>
+  const [count, setCount] = useReducer((x) => x + 1, 0);
+  return <button key="title2" id="title2" onClick={() => setCount(count + 1)}>{count}</button>
 }
 
 single3.addEventListener('click', () => {

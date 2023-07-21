@@ -1,7 +1,7 @@
 import { HostRoot, HostComponent, FunctionComponent } from './ReactWorkTags';
 import { reconcileChildFibers, mountChildFibers } from './ReactChildFiber';
 import { shouldSetTextContent } from './ReactDomHostConfig';
-import { Placement } from './ReactFiberFlags';
+import { renderHooks } from './ReactFiberHooks';
 
 export function beginWork(current, workInProgress) {
   switch (workInProgress.tag) {
@@ -48,6 +48,7 @@ function updateHostComponent(current, workInProgress) {
 }
 
 function updateFunctionComponent(current, workInProgress) {
+  renderHooks(workInProgress);
   const { type, props } = workInProgress;
   const children = type(props);
   reconcileChildren(current, workInProgress, children);

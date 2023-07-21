@@ -28,3 +28,5 @@ function createFiberRoot(containerInfo) {
   initializeUpdateQuene(hostRootFiber);
   return fiberRoot;
 }
+
+export * from './ReactFiberHooks';
