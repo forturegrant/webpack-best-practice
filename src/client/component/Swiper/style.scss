@@ -1,0 +1,16 @@
+.swiper-container {
+  --slide-size: 100vw;
+  --strack-offset: 0vw;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
+
+  .swiper-item {
+    width: var(--slide-size);
+  }
+}
+
+.animate {
+  transition: ease 0.3s;
+}
