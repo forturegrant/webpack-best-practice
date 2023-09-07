@@ -23,7 +23,6 @@ export function completeWork(current, workInProgress) {
         const type = workInProgress.type; // div p span
         // 创建此fiber的真实DOM
         const instance = createInstance(type, newProps);
-        console.log(instance, 'instance');
         appendAllChildren(instance, workInProgress);
         // 让此fiber的真实DOM属性指向instance
         workInProgress.stateNode = instance;

@@ -1,11 +1,11 @@
-import React from "react";
+import React from "../reactCode/react";
 import { render } from "react-dom";
 import App from "./app";
 import { addNumber, getName } from "./math";
 // //@ts-ignore
 // import _ from "lodash";
 import { registerMicroApps, start, loadMicroApp } from "qiankun";
-import { ReactDOM, useReducer } from "../reactCode/react";
+import { ReactDOM, useReducer } from "../reactCode/ReactDOM";
 import './i18n.js';
 
 // console.log(_.join(["a", "b", "c"], "***"));
@@ -79,6 +79,7 @@ single1.addEventListener('click', () => {
   let element = (
     <div key="title" id="title">title</div>
   )
+  console.log(element, 'element');
   ReactDOM.render(element, document.getElementById('root'));
 })
 

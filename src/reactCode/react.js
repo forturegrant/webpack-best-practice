@@ -1,32 +1,59 @@
-import { createHostRootFiber } from './ReactFiber';
-import { updateContainer } from './ReactFiberReconciler';
-import { initializeUpdateQuene } from './ReactUpdateQuene';
+import { REACT_ELEMENT_TYPE } from "./ReactSymbols";
 
-// ReactDom.render 开始把虚拟dom渲染到容器中
-function render(element, container) {
-  let fiberRoot = container._reactRootContainer;
-  if (!fiberRoot) {
-    fiberRoot = container._reactRootContainer = createFiberRoot(container);
-  }
-  updateContainer(element, fiberRoot);
+const RESERVED_PROPS = {
+  key: true,
+  ref: true,
+  __self: true,
+  __source: true
 }
 
-export const ReactDOM = {
-  render
+/**
+ * 创建虚拟DOM
+ * @param {*} type 元素的类型
+ * @param {*} config 配置对象
+ * @param {*} children 第一个儿子，如果有多个儿子的话会依次放在后面
+ */
+
+function createElement(type, config, children) {
+  let propName;
+  const props = {};
+  let key = null;
+  let ref = null;
+  if (config) {
+    if (config.key) {
+      key = config.key;
+    }
+    if (config.ref) {
+      ref = config.ref;
+    }
+    for (propName in config) {
+      if (!RESERVED_PROPS.hasOwnProperty(propName)) {
+        props[propName] = config[propName];
+      }
+    }
+  }
+  const childrenLength = arguments.length - 2;
+  if (childrenLength === 1) {
+    props.children = children;
+  } else if (childrenLength > 1) {
+    const childArray = new Array(childrenLength);
+    for (let i = 0; i < childrenLength; i++) {
+      childArray[i] = arguments[i + 2];
+    }
+    props.children = childArray;
+  }
+
+  return {
+    $$typeof: REACT_ELEMENT_TYPE, // 类型是一个React元素
+    type,
+    ref,
+    key,
+    props
+  }
 };
 
-// createFiberRoot  创建fiberRootNode（真实dom，id = 'root'）和hostRootFiber（stateNode指向fiberRootNode）
+const React = {
+  createElement
+};
 
-function createFiberRoot(containerInfo) {
-  const fiberRoot = { containerInfo }; // fiberRoot指的就是容器对象containerInfo  div#root
-  const hostRootFiber = createHostRootFiber(); // 创建fiber树的根节点   这两个对应上面说的
-  // 当前fiberRoot的current指向这个根fiber
-  // current当前的意思，它指的是当前跟我们页面中真实dom相同的fiber树
-  fiberRoot.current = hostRootFiber;
-  // 让此根fiber的真实节点指向fiberRoot div#root  stateNode就是指真实dom的意思
-  hostRootFiber.stateNode = fiberRoot;
-  initializeUpdateQuene(hostRootFiber);
-  return fiberRoot;
-}
-
-export * from './ReactFiberHooks';
+export default React;
